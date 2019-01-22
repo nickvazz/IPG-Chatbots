@@ -8,10 +8,10 @@ from pymessenger.bot import Bot
 
 app = Flask(__name__)
 
-with open('access_token.txt') as f:
-	ACCESS_TOKEN = f.readline().replace('\n','')
 
-VERIFY_TOKEN = "test-token"
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+
 bot = Bot(ACCESS_TOKEN)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -62,4 +62,5 @@ def send_message(recipient_id, response):
 
 
 if __name__ == '__main__':
+	# if fails, check the webhooks subscription with the ngrok
 	app.run()

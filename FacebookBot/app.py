@@ -2,16 +2,16 @@
 # https://www.twilio.com/blog/2018/02/facebook-messenger-bot-heroku-python-flask.html
 # https://www.twilio.com/blog/extending-your-flask-app-with-an-api
 
-import random
+import os, random
 from flask import Flask, request
 from pymessenger.bot import Bot
 
 app = Flask(__name__)
 
-with open('access_token.txt') as f:
-	ACCESS_TOKEN = f.readline().replace('\n','')
 
-VERIFY_TOKEN = "test-token"
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+
 bot = Bot(ACCESS_TOKEN)
 
 @app.route('/', methods=['GET', 'POST'])
